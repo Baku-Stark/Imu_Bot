@@ -1,4 +1,6 @@
 const dotenv = require("dotenv").config();
+const { Colors } = require("./colors");
+
 const {DISCORD_TOKEN, CLIENT_ID, GUILD_ID} = process.env
 // console.log({DISCORD_TOKEN, CLIENT_ID, GUILD_ID})
 
@@ -42,8 +44,16 @@ const rest = new REST().setToken(DISCORD_TOKEN);
 			{ body: commands },
 		);
 
-        console.log(data)
-		console.log(`[+] Successfully reloaded ${data.length} application (/) commands.`);
+		const commands_sets = []
+		for(const c_command of data){
+			// console.log(c_command);
+			commands_sets.push({'Name Command': c_command.name, 'Description': c_command.description});
+		}
+		
+		console.table([...commands_sets]);
+
+		const message_data_length = Colors.CYAN + data.length + Colors.END
+		console.log(`[+] Successfully reloaded | ${message_data_length} | application (/) commands.`);
 	}
     
     catch (error){ 

@@ -1,3 +1,8 @@
+// DEPLOY COMMANDS
+require("./deploy-commands");
+
+const { Colors } = require("./colors");
+
 const dotenv = require("dotenv").config();
 const {DISCORD_TOKEN} = process.env
 
@@ -30,41 +35,49 @@ for (const folder of commandFolders) {
 		}
         
         else {
-			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+			console.log(Colors.RED + `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.` + Colors.END);
 		}
 	}
 }
 
-client.once(Events.ClientReady, readyClient => {
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
+try{
 
-client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	try {
-		await command.execute(interaction);
-	}
-    
-    catch (error) {
-		console.error(error);
-
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+	client.once(Events.ClientReady, readyClient => {
+		console.log(Colors.BACK_GREEN + `[+] Ready! Logged in DISCORD! [+]` + Colors.END);
+		console.log(Colors.GREEN + `└── Welcome! ${readyClient.user.tag} ` + Colors.END);
+	});
+	
+	client.on(Events.InteractionCreate, async interaction => {
+		if (!interaction.isChatInputCommand()) return;
+	
+		const command = interaction.client.commands.get(interaction.commandName);
+	
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
 		}
-        
-        else {
-			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	
+		try {
+			await command.execute(interaction);
 		}
-	}
-});
+		
+		catch (error) {
+			console.error(error);
+	
+			if (interaction.replied || interaction.deferred) {
+				await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+			}
+			
+			else {
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			}
+		}
+	});
+	
+	// Log in to Discord with your client's token
+	client.login(DISCORD_TOKEN);
+}
 
-// Log in to Discord with your client's token
-client.login(DISCORD_TOKEN);
+catch(ConnectTimeoutError){
+	console.error(ConnectTimeoutError);
+}
