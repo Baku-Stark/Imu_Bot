@@ -1,3 +1,7 @@
+/*
+    * Author: Baku-Stark
+*/
+
 const Colors = {
     BLACK  :   '\x1b[1;30m',
     RED    :   '\x1b[31m',
