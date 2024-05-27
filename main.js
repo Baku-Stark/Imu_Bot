@@ -43,7 +43,7 @@ for (const folder of commandFolders) {
 try{
 
 	client.once(Events.ClientReady, readyClient => {
-		console.log(Colors.BACK_GREEN + `[+] Ready! Logged in DISCORD! [+]` + Colors.END);
+		console.log(Colors.GREEN + "●" + Colors.END + " Ready! Logged in DISCORD! [+]");
 		console.log(Colors.GREEN + `└── Welcome! ${readyClient.user.tag} ` + Colors.END);
 	});
 	
