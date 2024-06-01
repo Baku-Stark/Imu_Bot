@@ -24,7 +24,7 @@
 {
   guild: <ref *1> Guild {
     id: '633340730441728001',
-    name: 'Oficina — Nasod',
+    name: 'Server Name',
     icon: '5fecd24568a54539f19c52b2710b7589',
     features: [ 'COMMUNITY', 'NEWS' ],
     commands: GuildApplicationCommandManager {

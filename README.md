@@ -15,11 +15,6 @@ A versão utilizada no projeto é a `nodejs 20.13.1` porquê o Discordjs só sup
 sudo apt install nodejs
 ```
 
-> **Instalando o nodejs**
-```bash
-sudo apt install nodejs
-```
-
 > (Se necessário) **Limpe o cache**
 ```bash
 sudo npm cache clean -f
