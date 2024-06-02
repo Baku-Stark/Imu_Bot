@@ -1,8 +1,8 @@
 const dotenv = require("dotenv").config();
 const { Colors } = require("./colors");
 
-const {DISCORD_TOKEN, CLIENT_ID, GUILD_ID} = process.env
-// console.log({DISCORD_TOKEN, CLIENT_ID, GUILD_ID})
+const {DISCORD_TOKEN, CLIENT_ID, GUILD_RPG_ID} = process.env
+// console.log({DISCORD_TOKEN, CLIENT_ID, GUILD_RPG_ID})
 
 const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
@@ -40,7 +40,7 @@ const rest = new REST().setToken(DISCORD_TOKEN);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
-			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			Routes.applicationGuildCommands(CLIENT_ID, GUILD_RPG_ID),
 			{ body: commands },
 		);
 
