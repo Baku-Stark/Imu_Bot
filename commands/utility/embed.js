@@ -29,7 +29,8 @@ module.exports = {
         // console.log(interaction)
 		// console.log(interaction.user)
         // console.log(GuildCheck(interaction.member.guild.id))
-		console.log(`[${interaction.commandName}]: ${interaction.member.guild.id}`)
+		
+		// console.log(`[${interaction.commandName}]: ${interaction.member.guild.id}`)
         
         if(GuildCheck(interaction.member.guild.id)){
             await interaction.reply({embeds: [exampleEmbed]});
