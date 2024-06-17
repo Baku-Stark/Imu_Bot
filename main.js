@@ -8,9 +8,8 @@ const {DISCORD_TOKEN} = process.env
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection,Events, GatewayIntentBits } = require("discord.js")
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds]})
+const { Client, Collection,Events, GatewayIntentBits, InteractionType } = require("discord.js")
+const client = new Client({ intents: [GatewayIntentBits.Guilds]}) //, IntentsBitField
 client.commands = new Collection()
 
 const foldersPath = path.join(__dirname, 'commands');
@@ -41,7 +40,6 @@ for (const folder of commandFolders) {
 }
 
 try{
-
 	client.once(Events.ClientReady, readyClient => {
 		console.log(Colors.GREEN + "●" + Colors.END + " Ready! Logged in DISCORD!");
 		console.log(Colors.GREEN + `└── Welcome! ${readyClient.user.tag} ` + Colors.END);
@@ -71,6 +69,18 @@ try{
 			else {
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 			}
+		}
+	});
+
+	// # [MODAL RESPONSE]
+	client.on('interactionCreate', async interaction => {
+		// console.log(client)
+		// console.log(interaction.type)
+	
+		if (interaction.customId === 'fav-color') {
+			const favoriteColor = interaction.fields.getTextInputValue('favColorInput');
+	
+			await interaction.reply(`Your favorite color is ${favoriteColor}.`);
 		}
 	});
 	
