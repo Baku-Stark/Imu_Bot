@@ -17,7 +17,7 @@ for (const folder of commandFolders) {
 	//console.log(folder);
 
 	if(folder == SERVICES.command_folder_used){
-		console.log(folder);
+		//console.log(folder);
 		const commandsPath = path.join(foldersPath, folder);
 		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 		
@@ -46,7 +46,7 @@ const rest = new REST().setToken(DISCORD_TOKEN);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(`-> : Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
 			Routes.applicationGuildCommands(CLIENT_ID, GUILD_RPG_ID),

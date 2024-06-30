@@ -4,11 +4,11 @@ require("./deploy-commands");
 const { Colors } = require("./colors");
 
 const dotenv = require("dotenv").config();
-const {DISCORD_TOKEN} = process.env
+const {DISCORD_TOKEN} = process.env;
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection,Events, GatewayIntentBits, InteractionType } = require("discord.js");
+const { Client, Collection,Events, GatewayIntentBits } = require("discord.js");
 const { SERVICES } = require("./guild_permissions");
 const client = new Client({ intents: [GatewayIntentBits.Guilds]}) //, IntentsBitField
 client.commands = new Collection()
@@ -21,7 +21,7 @@ for (const folder of commandFolders) {
 	//console.log(folder);
 
 	if(folder == SERVICES.command_folder_used){
-		console.log(folder);
+		//console.log(folder);
 		const commandsPath = path.join(foldersPath, folder);
 		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 		
