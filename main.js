@@ -8,7 +8,8 @@ const {DISCORD_TOKEN} = process.env
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection,Events, GatewayIntentBits, InteractionType } = require("discord.js")
+const { Client, Collection,Events, GatewayIntentBits, InteractionType } = require("discord.js");
+const { SERVICES } = require("./guild_permissions");
 const client = new Client({ intents: [GatewayIntentBits.Guilds]}) //, IntentsBitField
 client.commands = new Collection()
 
@@ -17,25 +18,31 @@ const commandFolders = fs.readdirSync(foldersPath);
 //console.log(foldersPath)
 
 for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	//console.log(folder);
+
+	if(folder == SERVICES.command_folder_used){
+		console.log(folder);
+		const commandsPath = path.join(foldersPath, folder);
+		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+		
+		for (const file of commandFiles) {
+			// console.log(`${folder} -> ${file}`)
 	
-    for (const file of commandFiles) {
-        //console.log(`${folder} -> ${file}`)
-
-		const filePath = path.join(commandsPath, file);
-		const command = require(filePath);
-
-		if ('data' in command && 'execute' in command) {
-            //console.log("Command's name: " + command.data.name)
-            //console.log(command)
-
-			client.commands.set(command.data.name, command);
+			const filePath = path.join(commandsPath, file);
+			const command = require(filePath);
+	
+			if ('data' in command && 'execute' in command) {
+				//console.log("Command's name: " + command.data.name)
+				//console.log(command)
+	
+				client.commands.set(command.data.name, command);
+			}
+			
+			else {
+				console.log(Colors.RED + `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.` + Colors.END);
+			}
 		}
-        
-        else {
-			console.log(Colors.RED + `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.` + Colors.END);
-		}
+
 	}
 }
 

@@ -1,3 +1,7 @@
+exports.SERVICES = {
+    "command_folder_used":"service"
+}
+
 exports.GuildCheck = (req_guild_id) => {
     const GuildsPermissions = [
         "633340730441728001",
