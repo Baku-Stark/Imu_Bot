@@ -1,5 +1,6 @@
 exports.SERVICES = {
     "command_folder_used":"service"
+    //"command_folder_used":"utility"
 }
 
 exports.GuildCheck = (req_guild_id) => {
@@ -19,6 +20,7 @@ exports.Bot_Images = {
 
 exports.Guild_Roles = {
     "adm" : "1252374354780491796",
+    "avaliador_fichas" : "1253613442322141274"
 }
 
 exports.Guild_Images = {
