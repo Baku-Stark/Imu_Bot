@@ -70,11 +70,11 @@ try{
 			console.error(error);
 	
 			if (interaction.replied || interaction.deferred) {
-				await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+				await interaction.followUp({ content: 'Ocorreu um erro ao tentar executar este comando!', ephemeral: true });
 			}
 			
 			else {
-				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+				await interaction.reply({ content: 'Ocorreu um erro ao tentar executar este comando!', ephemeral: true });
 			}
 		}
 	});
