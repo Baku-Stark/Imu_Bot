@@ -83,11 +83,26 @@ try{
 	client.on('interactionCreate', async interaction => {
 		// console.log(client)
 		// console.log(interaction.type)
-	
-		if (interaction.customId === 'fav-color') {
-			const favoriteColor = interaction.fields.getTextInputValue('favColorInput');
-	
-			await interaction.reply(`Your favorite color is ${favoriteColor}.`);
+		
+		if (interaction.customId === 'new-persona') {
+			// ModalBuilder().setCustomId
+
+			const ficha_personagem = {
+				"nome": interaction.fields.getTextInputValue('nome_persona'),
+				"idade": interaction.fields.getTextInputValue('idade_persona'),
+				"sexo": interaction.fields.getTextInputValue('sexo_persona'),
+				"altura": interaction.fields.getTextInputValue('altura_persona'),
+				"peso": interaction.fields.getTextInputValue('peso_persona'),
+			};
+			// TextInputBuilder().setCustomId
+			
+			// === SEND MESSAGE ON DISCORD SERVER ===
+			await interaction.reply(`
+				## Novo Personagem!
+				\n
+				\n**Nome**: ${ficha_personagem.nome}
+				\nO personagem está pronto para uso e foi adicionado ao banco de dados.
+			`);
 		}
 	});
 	

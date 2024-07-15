@@ -14,7 +14,7 @@ const EmbedAjuda = new EmbedBuilder()
 	.setThumbnail(Guild_Images.logo)
 	.addFields(
         { name: "**──────── ｢ 火 ｣ ────────**", value: ":pen:"},
-		{ name: "● `ficha`", value: "Comando para ativar o modal do servidor e criar uma ficha de personagem." },
+		{ name: "● `ficha_persona`", value: "Comando para ativar o modal do servidor e criar uma ficha de personagem." },
 		{ name: '\u200B', value: '\u200B' }, // --- ESPAÇAMENTO ---
 	)
 	//.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
