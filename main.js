@@ -2,6 +2,7 @@
 require("./deploy-commands");
 
 const { Colors } = require("./colors");
+const ReportInterface = require("./interface/ReportInterface");
 
 const dotenv = require("dotenv").config();
 const {DISCORD_TOKEN} = process.env;
@@ -84,25 +85,18 @@ try{
 		// console.log(client)
 		// console.log(interaction.type)
 		
-		if (interaction.customId === 'new-persona') {
+		if (interaction.customId === 'report-user') {
 			// ModalBuilder().setCustomId
 
-			const ficha_personagem = {
-				"nome": interaction.fields.getTextInputValue('nome_persona'),
-				"idade": interaction.fields.getTextInputValue('idade_persona'),
-				"sexo": interaction.fields.getTextInputValue('sexo_persona'),
-				"altura": interaction.fields.getTextInputValue('altura_persona'),
-				"peso": interaction.fields.getTextInputValue('peso_persona'),
-			};
+			const report_req = new ReportInterface(
+				interaction.fields.getTextInputValue('id_usuario'),
+				interaction.fields.getTextInputValue('text_report')
+			);
+			console.log(report_req.toString());
 			// TextInputBuilder().setCustomId
 			
 			// === SEND MESSAGE ON DISCORD SERVER ===
-			await interaction.reply(`
-				## Novo Personagem!
-				\n
-				\n**Nome**: ${ficha_personagem.nome}
-				\nO personagem está pronto para uso e foi adicionado ao banco de dados.
-			`);
+			await interaction.reply(`[-] Report enviado com sucesso! **Agradeço** por enviar a denuncia para a administração fazer análise!`);
 		}
 	});
 	

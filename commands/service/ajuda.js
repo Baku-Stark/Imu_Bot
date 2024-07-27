@@ -34,7 +34,7 @@ module.exports = {
 
         else{
             await interaction.reply(`
-               **[x] Acess Denied!!**
+               **[x] Access Denied!!**
             `);
         }
 	},
