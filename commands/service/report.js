@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-const { GuildCheck, Guild_Roles } = require('../../guild_permissions');
+const { GuildCheck } = require('../../guild_permissions');
 
 const modalExample = new ModalBuilder()
     .setCustomId('report-user')
@@ -18,12 +18,11 @@ const TextInput = new TextInputBuilder()
     .setLabel('Qual o motivo da reclamação?')
     .setRequired(true)
     .setStyle(TextInputStyle.Paragraph)
-    .setMinLength(1)
+    .setMinLength(10)
     .setMaxLength(200)
 
-
-modalExample.addComponents(new ActionRowBuilder().addComponents(IDUsuarioInput))
-modalExample.addComponents(new ActionRowBuilder().addComponents(TextInput))
+modalExample.addComponents(new ActionRowBuilder().addComponents(IDUsuarioInput));
+modalExample.addComponents(new ActionRowBuilder().addComponents(TextInput));
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("report_usuario")
@@ -35,9 +34,7 @@ module.exports = {
         }
 
         else{
-            await interaction.reply(`
-               **[x] Access Denied!!**
-            `);
+            await interaction.reply(`**[x] Access Denied!!**`);
         }
     }
 }

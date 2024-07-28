@@ -2,6 +2,7 @@
 require("./deploy-commands");
 
 const { Colors } = require("./colors");
+const time = require("./time");
 const ReportInterface = require("./interface/ReportInterface");
 
 const dotenv = require("dotenv").config();
@@ -87,16 +88,23 @@ try{
 		
 		if (interaction.customId === 'report-user') {
 			// ModalBuilder().setCustomId
+			try {
+				const report_req = new ReportInterface(
+					interaction.fields.getTextInputValue('id_usuario'),
+					interaction.fields.getTextInputValue('text_report')
+				);
+				// TextInputBuilder().setCustomId
 
-			const report_req = new ReportInterface(
-				interaction.fields.getTextInputValue('id_usuario'),
-				interaction.fields.getTextInputValue('text_report')
-			);
-			console.log(report_req.toString());
-			// TextInputBuilder().setCustomId
+				console.log(`● ${time.getDataAtual()}\n${report_req.toString()}`); // User Reported(ID de Usuário: string, Texto: string)
+				
+				// === SEND MESSAGE ON DISCORD SERVER ===
+				await interaction.reply(":white_check_mark: Report enviado com sucesso! **Agradeço** por enviar a denúncia para a administração fazer análise!");
+			}
 			
-			// === SEND MESSAGE ON DISCORD SERVER ===
-			await interaction.reply(`[-] Report enviado com sucesso! **Agradeço** por enviar a denuncia para a administração fazer análise!`);
+			catch (error) {
+				await interaction.reply(`:x: ${error}`);
+			}
+			
 		}
 	});
 	
