@@ -75,7 +75,16 @@ Parte para leitura importante dos jogadores
             "nivel" : "string"
         },
         "image" : "string",
-        "historia" : null
+        "historia": {
+                "background": "string",
+                "eventos_importantes": [
+                    {
+                        "evento": "string",
+                        "descricao": "string",
+                        "data": "string"
+                    }
+                ]
+            }
     }
 }
 ```
